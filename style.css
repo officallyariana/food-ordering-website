@@ -44,6 +44,10 @@ body{
     background: var(--bg);
 }
 
+.section{
+    padding: 2rem 7%;
+}
+
 .btn{
     margin-top: 1rem;
     display: inline-block;
@@ -199,6 +203,10 @@ body{
     .header{
         padding: 1.5rem 2rem;
     }
+
+    .section{
+    padding: 2rem 7%;
+}
 }
 
 @media(max-width:768px){
@@ -238,4 +246,32 @@ body{
     html{
         font-size: 55%;
     }
+}
+
+.home{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: #cfcfcf;
+    background-size: cover;
+    background-position: center;
+}
+
+.home .content{
+    max-width: 60rem;
+}
+
+
+.home .content h3{   
+    font-size: 6rem;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.home .content p{
+    font-size: 1rem;
+    color: #eee;
+    font-weight: lighter;
+    line-height: 1.8;
+    padding: 1rem 0;
 }

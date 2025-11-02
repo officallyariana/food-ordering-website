@@ -1,4 +1,6 @@
 let navbar = document.querySelector('.navbar');
+let cartItem = document.querySelector('.cart-items-container');
+let login = document.querySelector('.login-form');
 
 document.querySelector('#menu-btn').onclick = () =>{
     navbar.classList.toggle('active');
@@ -6,7 +8,6 @@ document.querySelector('#menu-btn').onclick = () =>{
     cartItem.classList.remove('active');
 }
 
-let cartItem = document.querySelector('.cart-items-container');
 
 document.querySelector('#cart-btn').onclick = () =>{
     cartItem.classList.toggle('active');
@@ -14,7 +15,6 @@ document.querySelector('#cart-btn').onclick = () =>{
     login.classList.remove('active');
 }
 
-let login = document.querySelector('.login-form');
 
 document.querySelector('#login-btn').onclick = () =>{
     login.classList.toggle('active');

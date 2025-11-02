@@ -275,6 +275,12 @@ body{
         height: auto;
     }
 
+    .review .box-container .box .user {
+    height: 4rem;
+    width: 4rem;
+}
+
+
 
     .header .navbar{
         position: absolute;
@@ -438,43 +444,118 @@ body{
 }
 }
 
-.menu .box-container{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-    gap: 1.5rem;
+.menu {
+    padding: 6rem 7%;
+    background: var(--bg);
 }
 
-.menu .box-container .box{
-    padding: 5rem;
+.menu .box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+    gap: 2rem;
+}
+
+.menu .box-container .box {
+    padding: 3rem 2rem;
     text-align: center;
     border: var(--border);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(6px);
+    transition: all 0.3s ease;
 }
 
-.menu .box-container .box img{
-    height: 10rem;
+.menu .box-container .box img {
+    height: 12rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+    object-fit: cover;
 }
 
-.menu .box-container .box h3{
+.menu .box-container .box h3 {
     color: #fff;
     font-size: 2rem;
     padding: 1rem 0;
 }
 
-.menu .box-container .box .price{
+.menu .box-container .box .price {
     color: #fff;
-    font-size: 2.5rem;
-    padding-bottom: 5rem 0;
+    font-size: 2rem;
+    margin-bottom: 1rem;
 }
 
-.menu .box-container .box .price span{
-    font-size: 1.5rem;
+.menu .box-container .box .price span {
+    font-size: 1.4rem;
     text-decoration: line-through;
+    color: #aaa;
+    margin-left: 0.5rem;
 }
 
-.menu .box-container .box:hover{
+.menu .box-container .box:hover {
     background: #fff;
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
 
-.menu .box-container .box:hover > *{
+.menu .box-container .box:hover > * {
     color: var(--black);
+}
+
+/* --- Review Section --- */
+
+.review {
+    padding: 6rem 7%;
+    background: var(--bg);
+}
+
+.review .box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+    gap: 2rem;
+}
+
+.review .box-container .box {
+    border: var(--border);
+    text-align: center;
+    padding: 3rem 2rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.review .box-container .box:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-5px);
+}
+
+.review .box-container .box p {
+    font-size: 1.5rem;
+    line-height: 1.8;
+    color: #ccc;
+    padding: 1.5rem 0;
+}
+
+.review .box-container .box .user {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border:  2px solid var(--main-color);
+}
+
+.review .box-container .box h3 {
+    font-size: 2rem;
+    color: #fff;
+}
+
+.review .box-container .box .stars {
+    color: var(--main-color);
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }

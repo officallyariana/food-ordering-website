@@ -8,7 +8,7 @@
 }
 
 *{
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto','Modak', sans-serif;
     margin:0; padding: 0;
     box-sizing: border-box;
     outline: none; border: none;
@@ -566,9 +566,86 @@ img {
     transition: all 0.3s ease;
 }
 
-.review .box-container .box:hover .stars i {
+.review .box-container .box:hover .stars i{
     color: #ffcc00; 
     transform: scale(1.1);
     filter: drop-shadow(0 0 6px #ffcc00);
 }
 
+
+.contact .row{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.contact .row form{
+    flex:1 1 45rem;
+    padding: 5rem 2rem;
+    text-align: center;
+}
+
+.contact .row form h3{
+    text-transform: uppercase;
+    font-size: 3.5rem;
+    color: #fff;
+}
+
+.contact .row form .inputBox{
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    background: var(--black);
+    border: var(--border);
+}
+
+.contact .row form .inputBox span{
+    font-size: 2rem;
+    color: #fff;
+    margin-right: 2rem;
+}
+
+.contact .row form .inputBox input{
+    width: 100%;
+    padding: 2rem;
+    font-size: 1.7rem;
+    color: #fff;
+    text-transform: none;
+    background: none;
+}
+
+.footer{
+    background: var(--black);
+    text-align: center;
+}
+
+
+.footer .links{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 2rem 0;
+    gap: 1rem;
+}
+
+.footer .links a{
+    padding: 7rem 2rem;
+    color: #fff;
+    border: var(--border);
+}
+.footer .links a:hover{
+    background: var(--bg);
+}
+
+.footer .credit{
+    padding: 1.5rem;
+    font-size: 2rem;
+    color: #fff;
+    font-weight: lighter;
+}
+
+.footer .credit span{
+    color: var(--main-color);
+}

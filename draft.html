@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Food Engine Eats</title>
+<link rel="stylesheet" href="draft.css" />
+</head>
+<body>
+<header>
+    <div class="logo">
+        <a href="draft.html">
+        <img src="website images/logo.png" alt="Food Engine Eats Logo" />
+        </a>
+    </div>
+    <nav>
+    <a href="#menu">Menu</a>
+    <a href="#">Login</a>
+    <button class="signup">Signup</button>
+    <button class="cart-btn"><span id="cart-count">0</span></button>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="rating">
+    <span>Google:</span>
+    <span class="stars">★★★★☆</span>
+    <span>(4.9)</span>
+    </div>
+    <h1>order now</h1>
+    <p>where the restaurants and customers meet!</p>
+    <button class="explore" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">
+    Explore menu</button>
+
+    <div class="image-slider">
+    <img src="website images/menu-1.png" alt="food 1" />
+    <img src="website images/menu-2.png" alt="food 2" />
+    <img src="website images/menu-3.png" alt="food 3" />
+    </div>
+</section>
+
+<section id="menu" class="menu-section">
+    <h2>Our Menu</h2>
+
+    <div class="menu-category">
+    <div class="menu-list">
+        <h3>asian cuisines</h3>
+
+        <div class="menu-item">
+        <div>
+            <h4>bibimbap</h4>
+            <p>korean mixed rice dish with an assortment of vegetables and meats</p>
+        </div>
+        <div class="menu-actions">
+            <span>$10.00</span>
+            <button class="add-to-cart" data-name="Bibimbap" data-price="10">Add</button>
+        </div>
+        </div>
+
+        <div class="menu-item">
+        <div>
+            <h4>tonkatsu 豚カツ</h4>
+            <p>deep fried pork cutlet with tonkatsu sauce, cabbage, and rice</p>
+        </div>
+        <div class="menu-actions">
+            <span>$9.00</span>
+            <button class="add-to-cart" data-name="Tonkatsu" data-price="9">Add</button>
+        </div>
+        </div>
+
+        
+        <div class="menu-item">
+        <div>
+            <h4>peking duck</h4>
+            <p>crispy roasted duck served with pancakes and hoisin sauce</p>
+        </div>
+        <div class="menu-actions">
+            <span>$6.00</span>
+            <button class="add-to-cart" data-name="Peking Duck" data-price="6">Add</button>
+        </div>
+        </div>
+
+        <div class="menu-item">
+        <div>
+            <h4>biriyani</h4>
+            <p>spiced rice dish with meat and vegetables</p>
+        </div>
+        <div class="menu-actions">
+            <span>$11.00</span>
+            <button class="add-to-cart" data-name="Biriyani" data-price="11">Add</button>
+        </div>
+        </div>
+
+        <div class="menu-item">
+        <div>
+            <h4>pad thai</h4>
+            <p>stir fried rice noodles with shrimp, peanuts, and bean sprouts</p>
+        </div>
+        <div class="menu-actions">
+            <span>$9.00</span>
+            <button class="add-to-cart" data-name="Pad Thai" data-price="9">Add</button>
+        </div>
+        </div>
+
+        
+        <div class="menu-item">
+        <div>
+            <h4>shawarma</h4>
+            <p>middle eastern thinly sliced meat wrapped in pita bread with garlic sauce and vegetables</p>
+        </div>
+        <div class="menu-actions">
+            <span>$12.00</span>
+            <button class="add-to-cart" data-name="Shawarma" data-price="12">Add</button>
+        </div>
+        </div>
+
+        
+        <div class="menu-item">
+        <div>
+            <h4>roti prata</h4>
+            <p>flaky, buttery flatbread served with curry or sugar for a sweet treat</p>
+        </div>
+        <div class="menu-actions">
+            <span>$5.00</span>
+            <button class="add-to-cart" data-name="Roti Prata" data-price="5">Add</button>
+        </div>
+        </div>
+    </div>
+    <img src="website images/menu-1.png" alt="asian food" />
+    </div>
+
+    <div class="menu-category">
+    <img src="website images/menu-2.png" alt="caribbean food" />
+    <div class="menu-list">
+        <h3>caribbean cuisines</h3>
+
+        <div class="menu-item">
+        <div>
+            <h4>jerk chicken</h4>
+            <p>spicy, smoky grilled-meat dish from Jamaica</p>
+        </div>
+        <div class="menu-actions">
+            <span>$7.00</span>
+            <button class="add-to-cart" data-name="Jerk Chicken" data-price="7">Add</button>
+        </div>
+        </div>
+
+        <div class="menu-item">
+        <div>
+            <h4>pepperpot stew</h4>
+            <p>meat-based stew with callaloo, beef or pig tail, and vegetables</p>
+        </div>
+        <div class="menu-actions">
+            <span>$15.00</span>
+            <button class="add-to-cart" data-name="Pepperpot Stew" data-price="15">Add</button>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<div class="cart-modal" id="cart-modal">
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-content">
+        <h3>Your Cart</h3>
+        <ul id="cart-items"></ul>
+        <p id="cart-total">Total: $0.00</p>
+
+        <div class="cart-buttons">
+        <button id="clear-cart-btn" class="danger">Clear Cart</button>
+        <button id="checkout-btn">Checkout</button>
+        <button id="close-cart">Close</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- footer starts here -->
+<section class="footer">
+        <div class="links">
+            <a href="#">home </a>
+            <a href="#">menu</a>
+            <a href="#">login</a>
+            <a href="#">signup</a>
+        </div>
+    <div class="credit"> created by <span>arian s.</span> copyrights | all rights reserved! </div>
+</section>
+<!-- footer ends here -->
+<script src="draft.js"></script>
+</body>
+</html>

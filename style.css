@@ -1,46 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Modak&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
-:root{
-    --main-color: #cfcfcf;
-    --black: #13131a;
-    --bg: #a8a8a8;
-    --border:.1rem solid rgba(255, 255, 255, 0.3);
-}
+    :root{
+    --bg:#e7e5e7;
+    --card:#d8d3e4;
+    --accent:#d28fff;
+    --dark:#111;
+    --muted:#6b6b6b;
+    --round:18px;
+    }
 
-*{
-    font-family: 'Roboto','Modak', sans-serif;
-    margin:0; padding: 0;
-    box-sizing: border-box;
-    outline: none; border: none;
-    text-decoration: none;
-    text-transform: capitalize;
-    transition: .2s linear;
-}
-
-
-html{
-    font-size: 58%;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    scroll-padding-top: 9rem;
-}
-
-html::-webkit-scrollbar{
-    width: 2rem;
-}
-
-html::-webkit-scrollbar-track{
-    background: transparent;
-}
-
-html::-webkit-scrollbar-thumb{
-    background: var(--main-color);
-    border-radius: 5rem;
-}
-
+*{box-sizing:border-box}
 body{
-    background: var(--bg);
-}
+    margin:0;
+    font-family:"Poppins",sans-serif;
+    background:var(--bg);
+    color:var(--dark);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    }
 
 .section{
     padding: 2rem 7%;
@@ -75,24 +52,25 @@ body{
 }
 
 .header{
-    background: var(--bg);
+    background: #fff;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.5rem 7%;
-    border-bottom: var(--border);
-    position: fixed;
-    top:0; left:0; right:0;
-    z-index: 1000;
+    padding: 18rem 28px;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+    position: sticky;
+    top: 0;
+    z-index: 30;
 }
 
 .header .logo img{
     height: 6rem;
 }
 .header .navbar a{
-    margin: 0.1rem;
-    font-size: 1.6rem;
-    color: #fff;
+    margin-left: 18px;
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--dark);
 }
 
 .header .navbar a:hover{

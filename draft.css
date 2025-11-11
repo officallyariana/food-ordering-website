@@ -1,0 +1,285 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #e8e8e8;
+    color: #111;
+    line-height: 1.6;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+
+.logo img{
+    height: 50px;
+    width: auto;
+    border-radius: 10px;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.logo img:hover{
+    transform: scale(1.05);
+}
+
+nav a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: #000;
+}
+
+.signup, .cart-btn {
+    background: #f4b6ff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.cart-btn{
+    background: #000;
+    color: #fff;
+}
+
+#cart-count{
+    background: #ff6363;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    margin-left: 4px;
+}
+
+.hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: #f2f2f2;
+}
+
+.hero .rating {
+    margin-bottom: 1rem;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero p {
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+.explore {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.image-slider {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+.image-slider img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 15px;
+    transition: transform 0.3s;
+}
+
+.image-slider img:hover {
+    transform: scale(1.05);
+}
+
+.menu-section {
+    padding: 3rem 2rem;
+}
+
+.menu-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.menu-category {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #d5d2f1;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.menu-category img {
+    width: 45%;
+    border-radius: 20px;
+}
+
+.menu-list {
+    width: 45%;
+}
+.menu-actions{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 0.8rem 0;
+}
+.add-to-cart {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 0.3rem 0.7rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.cart-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+}
+
+.cart-overlay {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cart-content {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    max-width: 90%;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    transition: right 0.3s ease;
+    z-index: 1001;
+    overflow-y: auto;
+}
+
+.cart-modal.show .cart-overlay {
+    opacity: 1;
+}
+
+.cart-modal.show .cart-content {
+    right: 0;
+}
+
+/* Cart content inner styles */
+.cart-content h3 {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+#cart-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+    overflow-y: auto;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+#cart-items li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+#checkout-btn,
+#close-cart,
+#clear-cart-btn {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#checkout-btn {
+    background: #000;
+    color: #fff;
+}
+
+#checkout-btn:hover {
+    background: #333;
+}
+
+#close-cart {
+    background: #ccc;
+}
+
+#close-cart:hover {
+    background: #999;
+}
+
+button.danger {
+    background-color: #c62828;
+    color: #fff;
+}
+
+button.danger:hover {
+    background-color: #b71c1c;
+}
+
+
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: #fff;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+}

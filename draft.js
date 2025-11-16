@@ -155,3 +155,5 @@ if (closeCheckoutBtn) {
 
 // -------------------------------
 updateCartDisplay();
+
+

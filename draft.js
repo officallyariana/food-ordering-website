@@ -153,6 +153,16 @@ if (closeCheckoutBtn) {
 });
 }
 
+// login page switch buttons
+
+document.querySelectorAll(".switch-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        document.querySelectorAll(".switch-btn").forEach(a => a.classList.remove("active"));
+        btn.classList.add("active");
+    });
+});
+
+
 // -------------------------------
 updateCartDisplay();
 

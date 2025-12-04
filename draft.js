@@ -1,4 +1,3 @@
-// Simple image slider auto-scroll
 const slider = document.querySelector('.image-slider');
 let scrollAmount = 0;
 
@@ -10,7 +9,6 @@ slider.scrollTo({ left: scrollAmount, behavior: 'smooth' });
 }
 setInterval(autoSlide, 50);
 
-// Cart functionality
 const cartBtn = document.querySelector('.cart-btn');
 const cartModal = document.getElementById('cart-modal');
 const cartOverlay = document.getElementById('cart-overlay'); // ✅ added
@@ -23,7 +21,6 @@ const addToCartBtns = document.querySelectorAll('.add-to-cart');
 
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Update cart display
 function updateCartDisplay() {
 if (!cartItemsList) return;
 
@@ -51,7 +48,6 @@ cartCount.textContent = cart.reduce((sum, i) => sum + i.qty, 0);
 localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-// Add to cart buttons
 if (addToCartBtns) {
     addToCartBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -65,7 +61,6 @@ if (addToCartBtns) {
 });
 }
 
-// Open / Close cart modal
 function closeModal() {
     cartModal.classList.remove('show');
     setTimeout(() => (cartModal.style.display = 'none'), 200);
@@ -81,7 +76,6 @@ if (cartBtn) {
 if (closeCart) closeCart.addEventListener('click', closeModal);
 if (cartOverlay) cartOverlay.addEventListener('click', closeModal);
 
-// Quantity & remove actions
 if (cartItemsList) {
 cartItemsList.addEventListener('click', e => {
     const index = e.target.dataset.index;
@@ -95,14 +89,12 @@ cartItemsList.addEventListener('click', e => {
 });
 }
 
-// Checkout navigation
 const checkoutBtn = document.getElementById('checkout-btn');
 if (checkoutBtn)
 checkoutBtn.addEventListener('click', () => {
     window.location.href = 'checkout.html';
 });
 
-// Checkout page rendering
 const orderSummary = document.getElementById('order-summary');
 if (orderSummary) {
     let storedCart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -122,7 +114,6 @@ totalP.textContent = `Total: $${total.toFixed(2)}`;
 orderSummary.appendChild(totalP);
 }
 
-// Checkout form submit
 const checkoutForm = document.getElementById('checkout-form');
 if (checkoutForm) {
     checkoutForm.addEventListener('submit', e => {
@@ -133,7 +124,6 @@ if (checkoutForm) {
 });
 }
 
-// Clear Cart button
 const clearCartBtn = document.getElementById('clear-cart-btn');
 if (clearCartBtn) {
     clearCartBtn.addEventListener('click', () => {
@@ -145,7 +135,6 @@ if (clearCartBtn) {
 });
 }
 
-// Close Checkout button
 const closeCheckoutBtn = document.getElementById('close-checkout');
 if (closeCheckoutBtn) {
     closeCheckoutBtn.addEventListener('click', () => {
@@ -153,7 +142,6 @@ if (closeCheckoutBtn) {
 });
 }
 
-// login page switch buttons
 
 document.querySelectorAll(".switch-btn").forEach(btn => {
     btn.addEventListener("click", () => {

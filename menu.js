@@ -9,3 +9,4 @@ const observer = new IntersectionObserver(entries => {
 document.querySelectorAll('.food-card').forEach(card => {
     observer.observe(card);
 });
+

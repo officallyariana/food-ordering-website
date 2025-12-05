@@ -55,7 +55,7 @@ $user = $_SESSION['user'] ?? null;
 <section id="menu-cards" class="menu-cards">
     <h2 class="section-title">OUR MENU</h2> 
 
-<div class="menu-grid">
+<div class="home-menu-grid">
     <div class="card">
         <img src="website-images/bibimbap.png" alt="">
         <h3>Asian cuisines</h3>
@@ -157,7 +157,6 @@ $user = $_SESSION['user'] ?? null;
 </div>
 </section>
 
-
 <div class="cart-modal" id="cart-modal">
     <div class="cart-overlay" id="cart-overlay"></div>
     <div class="cart-content">
@@ -172,7 +171,6 @@ $user = $_SESSION['user'] ?? null;
         </div>
     </div>
 </div>
-
 
 <!-- footer starts here -->
 <section class="footer">

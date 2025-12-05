@@ -67,35 +67,8 @@ $user = $_SESSION['user'] ?? null;
             <h3>Hispanic Cuisines</h3>
             <button onclick="window.location.href='hispanic.php'">Explore Variety</button>
         </div>
-
     </div>
 </section>
-
-
-<?php
-$categories = [
-    "Burgers" => ["Classic Burger", "Cheese Burger", "BBQ Bacon Burger"],
-    "Pizza" => ["Pepperoni", "Margherita", "Veggie Supreme"],
-    "Sushi" => ["California Roll", "Spicy Tuna", "Dragon Roll"],
-    "Desserts" => ["Chocolate Cake", "Brownie", "Ice Cream"],
-    "Drinks" => ["Iced Tea", "Lemonade", "Milkshake"]
-];
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Menu</title>
-<link rel="stylesheet" href="menu.css">
-</head>
-
-<body>
-<script src="menu.js"></script>
-</body>
-</html>
-
 <section class="footer">
     <div class="credit">created by <span>arian s.</span> copyrights | all rights reserved!</div>
 </section>

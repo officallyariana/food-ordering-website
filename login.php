@@ -54,6 +54,6 @@ if (! password_verify($password, $hashedPasswordFromDB)) {
 $_SESSION['user_id'] = $id;
 $_SESSION['user'] = $full_name;
 
-header('Location: draft.html');
+header('Location: draft.php');
 exit();
 ?>

@@ -1,3 +1,7 @@
+<?php
+session_start();
+$user = $_SESSION['user'] ?? null;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,15 +13,25 @@
 <body>
 <header>
     <div class="logo">
-        <a href="draft.html">
-        <img src="website-images/logo.png" alt="" />
+        <a href="draft.php">
+            <img src="website-images/logo.png" alt="" />
         </a>
     </div>
     <nav>
-    <a href="#menu">Menu</a>
-    <button class="login-btn" onclick="window.location.href='login.html'">Login</button>
-    <button class="signup-btn" onclick="window.location.href='signup.html'">Sign Up</button>
-    <button class="cart-btn"><span id="cart-count">0</span></button>
+        <?php if ($user): ?>
+            <span class="welcome-text">Welcome, <?= htmlspecialchars($user) ?>!</span>
+            
+            <form action="logout.php" method="POST" style="display: inline;">
+                <button class="logout-btn">Logout</button>
+            </form>
+
+        <?php else: ?>
+            <a href="login.html">Login</a>
+            <button class="signup-btn" onclick="window.location.href='signup.html'">Sign Up</button>
+        <?php endif; ?>
+
+        <a href="#menu">Menu</a>
+        <button class="cart-btn"><span id="cart-count">0</span></button>
     </nav>
 </header>
 
@@ -27,7 +41,7 @@
     <span class="stars">★★★★☆</span>
     <span>(4.9)</span>
     </div>
-    <h1>order now</h1>
+    <h1>Order Now</h1>
     <p>where the restaurants and customers meet!</p>
     <button class="explore" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">
     Explore menu</button>
@@ -57,13 +71,13 @@
     </div>
 
     <div class="card">
-        <img src="website-images/american-cusine.jpg" alt="">
+        <img src="website-images\american-cusine.jpg" alt="">
         <h3>American cuisines</h3>
         <button>Explore Variety</button>
     </div>
 
     <div class="card">
-        <img src="website-images/hispanic foods.jpg" alt="">
+        <img src="website-images/hispanic-foods.jpg" alt="">
         <h3>Hispanic cuisines</h3>
         <button>Explore Variety</button>
     </div>
@@ -88,9 +102,6 @@
             <p>cheese burger</p>
         </div>
     </div>
-</section>
-
-
 </section>
 
 <section class="why-choose-us">
@@ -140,7 +151,7 @@
             be user friendly for everyone and anyone involved. <br> Whether you're a restaurant owner looking to expand your reach or 
             a customer seeking delicious meals, this platform is designed to cater to your needs.</br>
             We aim to address the growing demand for convenient food ordering and delivery services in the food industry.
-        </p>
+        </p> 
     </div>
     <div class="about-image">
     <img src="website-images/about-image.jpg" alt="">
@@ -158,7 +169,7 @@
 
         <div class="cart-buttons">
         <button id="clear-cart-btn" class="danger">Clear Cart</button>
-        <button id="c-heckout-btn">Checkout</button>
+        <button id="checkout-btn">Checkout</button>
         <button id="close-cart">Close</button>
         </div>
     </div>

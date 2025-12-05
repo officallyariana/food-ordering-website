@@ -12,7 +12,6 @@ $user = $_SESSION['user'] ?? null;
 </head>
 
 <body>
-
 <header>
     <div class="logo">
         <a href="draft.php">
@@ -40,7 +39,7 @@ $user = $_SESSION['user'] ?? null;
 <section class="menu-page">
     <h2 class="section-title">Asian Cuisines</h2>
 
-    <div class="home-menu-grid">
+    <div class="menu-grid">
 
         <div class="card food-card" data-name="Bibimbap" data-price="10.00" data-image="website-images/bibimbap.png">
             <img src="website-images/bibimbap.png" alt="">
@@ -94,7 +93,8 @@ $user = $_SESSION['user'] ?? null;
 </section>
 
 <?php include "cart-ui.html"; ?>
+<script src="draft.js"></script>
 
-<script src="cart.js"></script>
 </body>
 </html>
+

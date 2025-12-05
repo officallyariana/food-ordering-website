@@ -146,5 +146,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     updateCartDisplay();
-    <script src="cart.js"></script>
+    <script src="draft.js"></script>
 });

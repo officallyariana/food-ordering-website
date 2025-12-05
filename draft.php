@@ -29,8 +29,6 @@ $user = $_SESSION['user'] ?? null;
             <a href="login.html">Login</a>
             <button class="signup-btn" onclick="window.location.href='signup.html'">Sign Up</button>
         <?php endif; ?>
-
-        <a href="#menu">Menu</a>
         <button class="cart-btn"><span id="cart-count">0</span></button>
     </nav>
 </header>
@@ -43,7 +41,7 @@ $user = $_SESSION['user'] ?? null;
     </div>
     <h1>Order Now</h1>
     <p>where the restaurants and customers meet!</p>
-    <button class="explore" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">
+    <button class="explore" onclick="window.location.href='menu.php'">
     Explore menu</button>
 
     <div class="image-slider">
@@ -57,31 +55,31 @@ $user = $_SESSION['user'] ?? null;
 <section id="menu-cards" class="menu-cards">
     <h2 class="section-title">OUR MENU</h2> 
 
-        <div class="menu-grid">
-        <div class="card">
-            <img src="website-images/bibimbap.png" alt="">
-            <h3>Asian cuisines</h3>
-            <button>Explore Variety</button>
-        </div>
+<div class="menu-grid">
+    <div class="card">
+        <img src="website-images/bibimbap.png" alt="">
+        <h3>Asian cuisines</h3>
+        <button onclick="window.location.href='asian.php'">Explore Variety</button>
+    </div>
 
     <div class="card">
         <img src="website-images/jerkchicken.jpg" alt="">
         <h3>Caribbean cuisines</h3>
-        <button>Explore Variety</button>
+        <button onclick="window.location.href='caribbean.php'">Explore Variety</button>
     </div>
 
     <div class="card">
-        <img src="website-images\american-cusine.jpg" alt="">
+        <img src="website-images/american-cusine.jpg" alt="">
         <h3>American cuisines</h3>
-        <button>Explore Variety</button>
+        <button onclick="window.location.href='american.php'">Explore Variety</button>
     </div>
 
     <div class="card">
         <img src="website-images/hispanic-foods.jpg" alt="">
         <h3>Hispanic cuisines</h3>
-        <button>Explore Variety</button>
+        <button onclick="window.location.href='hispanic.php'">Explore Variety</button>
     </div>
-    </div>
+</div>
 
     <section class="top-picks">
     <h2>Top Picks</h2>

@@ -73,6 +73,7 @@ $user = $_SESSION['user'] ?? null;
     <div class="credit">created by <span>arian s.</span> copyrights | all rights reserved!</div>
 </section>
 
+<?php include "cart-ui.html"; ?>
 <script src="draft.js"></script>
 </body>
 </html>

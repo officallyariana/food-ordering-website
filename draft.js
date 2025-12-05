@@ -1,4 +1,3 @@
-// ---------------- IMAGE SLIDER ----------------
 const slider = document.querySelector('.image-slider');
 let scrollAmount = 0;
 
@@ -10,8 +9,6 @@ function autoSlide() {
 }
 setInterval(autoSlide, 50);
 
-
-// ---------------- CART SYSTEM ----------------
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function saveCart() {
@@ -67,17 +64,15 @@ function addToCart(name, price, image) {
     updateCartDisplay();
 }
 
-
-// ---------------- DOM LOADED ----------------
 document.addEventListener("DOMContentLoaded", () => {
 
-    // ADD TO CART BUTTONS
+    /* ADD-TO-CART BUTTONS */
     document.querySelectorAll(".add-to-cart").forEach(btn => {
         btn.addEventListener("click", () => {
             const card = btn.closest(".food-card") || btn.closest(".card");
             if (!card) return;
 
-            const name = card.dataset.name;
+            const name  = card.dataset.name;
             const price = parseFloat(card.dataset.price);
             const image = card.dataset.image;
 
@@ -85,15 +80,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // CART ELEMENTS
-    const cartBtn = document.querySelector(".cart-btn");
-    const cartModal = document.getElementById("cart-modal");
-    const cartOverlay = document.getElementById("cart-overlay");
-    const closeCart = document.getElementById("close-cart");
-    const clearCartBtn = document.getElementById("clear-cart-btn");
+    /* CART UI ELEMENTS */
+    const cartBtn       = document.querySelector(".cart-btn");
+    const cartModal     = document.getElementById("cart-modal");
+    const cartOverlay   = document.getElementById("cart-overlay");
+    const closeCart     = document.getElementById("close-cart");
+    const clearCartBtn  = document.getElementById("clear-cart-btn");
     const cartItemsList = document.getElementById("cart-items");
 
-    // OPEN CART
+    /* OPEN CART */
     if (cartBtn && cartModal) {
         cartBtn.addEventListener("click", () => {
             cartModal.style.display = "block";
@@ -101,21 +96,21 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // CLOSE CART
+    /* CLOSE CART */
     if (closeCart) {
         closeCart.addEventListener("click", () => {
             cartModal.style.display = "none";
         });
     }
 
-    // CLOSE CART BY OVERLAY CLICK
+    /* CLOSE CART FROM OVERLAY */
     if (cartOverlay) {
         cartOverlay.addEventListener("click", () => {
             cartModal.style.display = "none";
         });
     }
 
-    // CART ITEM EVENTS
+    /* CART ITEM ACTIONS */
     if (cartItemsList) {
         cartItemsList.addEventListener("click", (e) => {
             const index = e.target.dataset.index;
@@ -134,10 +129,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // CLEAR CART
+    /* CLEAR CART */
     if (clearCartBtn) {
         clearCartBtn.addEventListener("click", () => {
-            if (confirm("Clear your cart?")) {
+            if (confirm("Clear your entire cart?")) {
                 cart = [];
                 saveCart();
                 updateCartDisplay();
@@ -146,5 +141,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     updateCartDisplay();
-    <script src="draft.js"></script>
 });

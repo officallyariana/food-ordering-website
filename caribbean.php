@@ -84,7 +84,6 @@ $user = $_SESSION['user'] ?? null;
 
     </div>
 </section>
-
 <?php include "cart-ui.html"; ?>
 <script src="draft.js"></script>
 

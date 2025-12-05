@@ -70,7 +70,6 @@ $user = $_SESSION['user'] ?? null;
             <h3>Mexican Tortas</h3>
             <button class="add-to-cart">Add to Cart</button>
         </div>
-
     </div>
 </section>
 

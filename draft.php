@@ -146,8 +146,8 @@ $user = $_SESSION['user'] ?? null;
     <div class="about-text">
         <h2>ABOUT US! </h2>
         <p>I made this website to connect restaurants and customers seamlessly. I wanted it to
-            be user friendly for everyone and anyone involved. <br> Whether you're a restaurant owner looking to expand your reach or 
-            a customer seeking delicious meals, this platform is designed to cater to your needs.</br>
+            be user friendly for everyone and anyone involved. Whether you're a restaurant owner looking to expand your reach or 
+            a customer seeking delicious meals, this platform is designed to cater to your needs.
             We aim to address the growing demand for convenient food ordering and delivery services in the food industry.
         </p> 
     </div>
@@ -156,7 +156,6 @@ $user = $_SESSION['user'] ?? null;
     </div>
 </div>
 </section>
-
 <div class="cart-modal" id="cart-modal">
     <div class="cart-overlay" id="cart-overlay"></div>
     <div class="cart-content">
@@ -165,9 +164,9 @@ $user = $_SESSION['user'] ?? null;
         <p id="cart-total">Total: $0.00</p>
 
         <div class="cart-buttons">
-        <button id="clear-cart-btn" class="danger">Clear Cart</button>
-        <button id="checkout-btn">Checkout</button>
-        <button id="close-cart">Close</button>
+            <button id="clear-cart-btn" class="danger">Clear Cart</button>
+            <button id="checkout-btn">Checkout</button>
+            <button id="close-cart">Close</button>
         </div>
     </div>
 </div>
@@ -177,6 +176,7 @@ $user = $_SESSION['user'] ?? null;
     <div class="credit"> created by <span>arian s.</span> copyrights | all rights reserved! </div>
 </section>
 <!-- footer ends here -->
+<?php include "cart-ui.html"; ?>
 <script src="draft.js"></script>
 </body>
 </html>

@@ -70,10 +70,8 @@ $user = $_SESSION['user'] ?? null;
             <h3>Cornbread</h3>
             <button class="add-to-cart">Add to Cart</button>
         </div>
-
     </div>
 </section>
-
 <?php include "cart-ui.html"; ?>
 <script src="draft.js"></script>
 

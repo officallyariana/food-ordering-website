@@ -1,6 +1,4 @@
-/* ================================
-   IMAGE SLIDER (homescreen only)
-================================ */
+
 const slider = document.querySelector(".image-slider");
 let scrollAmount = 0;
 
@@ -17,9 +15,6 @@ function autoSlide() {
 setInterval(autoSlide, 40);
 
 
-/* ================================
-   CART DATA (shared w/localStorage)
-================================ */
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function saveCart() {
@@ -76,12 +71,8 @@ function addToCart(name, price, image) {
 }
 
 
-/* ================================
-   INIT — AFTER PAGE LOAD
-================================ */
-document.addEventListener("DOMContentLoaded", () => {
 
-    /* -------- ADD TO CART BUTTONS -------- */
+document.addEventListener("DOMContentLoaded", () => {
     const addButtons = document.querySelectorAll(".add-to-cart");
 
     addButtons.forEach(btn => {
@@ -97,8 +88,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-
-    /* -------- CART ELEMENTS -------- */
     const cartBtn       = document.querySelector(".cart-btn");
     const cartModal     = document.getElementById("cart-modal");
     const cartOverlay   = document.getElementById("cart-overlay");

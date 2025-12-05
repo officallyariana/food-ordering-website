@@ -1,14 +1,25 @@
-const slider = document.querySelector('.image-slider');
+/* ================================
+   IMAGE SLIDER (homescreen only)
+================================ */
+const slider = document.querySelector(".image-slider");
 let scrollAmount = 0;
 
 function autoSlide() {
     if (!slider) return;
     scrollAmount += 1;
-    if (scrollAmount > slider.scrollWidth - slider.clientWidth) scrollAmount = 0;
-    slider.scrollTo({ left: scrollAmount, behavior: 'smooth' });
-}
-setInterval(autoSlide, 50);
 
+    if (scrollAmount > slider.scrollWidth - slider.clientWidth) {
+        scrollAmount = 0;
+    }
+
+    slider.scrollTo({ left: scrollAmount, behavior: "smooth" });
+}
+setInterval(autoSlide, 40);
+
+
+/* ================================
+   CART DATA (shared w/localStorage)
+================================ */
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function saveCart() {
@@ -17,9 +28,9 @@ function saveCart() {
 
 function updateCartCount() {
     const badge = document.getElementById("cart-count");
-    if (badge) {
-        badge.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
-    }
+    if (!badge) return;
+
+    badge.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
 }
 
 function updateCartDisplay() {
@@ -37,7 +48,7 @@ function updateCartDisplay() {
         const li = document.createElement("li");
         li.innerHTML = `
             <span>${item.name}</span>
-            <div>
+            <div class="item-controls">
                 <button class="qty-btn" data-index="${index}" data-action="decrease">-</button>
                 <span>${item.qty}</span>
                 <button class="qty-btn" data-index="${index}" data-action="increase">+</button>
@@ -53,10 +64,10 @@ function updateCartDisplay() {
 }
 
 function addToCart(name, price, image) {
-    let existing = cart.find(item => item.name === name);
+    const existing = cart.find(item => item.name === name);
 
     if (existing) {
-        existing.qty++;
+        existing.qty += 1;
     } else {
         cart.push({ name, price, image, qty: 1 });
     }
@@ -64,61 +75,70 @@ function addToCart(name, price, image) {
     updateCartDisplay();
 }
 
+
+/* ================================
+   INIT — AFTER PAGE LOAD
+================================ */
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* ADD-TO-CART BUTTONS */
-    document.querySelectorAll(".add-to-cart").forEach(btn => {
+    /* -------- ADD TO CART BUTTONS -------- */
+    const addButtons = document.querySelectorAll(".add-to-cart");
+
+    addButtons.forEach(btn => {
         btn.addEventListener("click", () => {
             const card = btn.closest(".food-card") || btn.closest(".card");
             if (!card) return;
 
-            const name  = card.dataset.name;
-            const price = parseFloat(card.dataset.price);
-            const image = card.dataset.image;
-
-            addToCart(name, price, image);
+            addToCart(
+                card.dataset.name,
+                parseFloat(card.dataset.price),
+                card.dataset.image
+            );
         });
     });
 
-    /* CART UI ELEMENTS */
+
+    /* -------- CART ELEMENTS -------- */
     const cartBtn       = document.querySelector(".cart-btn");
     const cartModal     = document.getElementById("cart-modal");
     const cartOverlay   = document.getElementById("cart-overlay");
     const closeCart     = document.getElementById("close-cart");
     const clearCartBtn  = document.getElementById("clear-cart-btn");
+    const checkoutBtn   = document.getElementById("checkout-btn");
     const cartItemsList = document.getElementById("cart-items");
 
-    /* OPEN CART */
-    if (cartBtn && cartModal) {
-        cartBtn.addEventListener("click", () => {
-            cartModal.style.display = "block";
-            updateCartDisplay();
-        });
-    }
 
-    /* CLOSE CART */
-    if (closeCart) {
-        closeCart.addEventListener("click", () => {
-            cartModal.style.display = "none";
-        });
-    }
+cartBtn.addEventListener("click", () => {
+    cartModal.classList.add("show");
+    cartModal.style.display = "block";
+    updateCartDisplay();
+});
 
-    /* CLOSE CART FROM OVERLAY */
-    if (cartOverlay) {
-        cartOverlay.addEventListener("click", () => {
-            cartModal.style.display = "none";
-        });
-    }
+    /* -------- CLOSE CART -------- */
+function closeCartModal() {
+    cartModal.classList.remove("show");
+    setTimeout(() => {
+        cartModal.style.display = "none";
+    }, 300); // matches CSS animation
+}
 
-    /* CART ITEM ACTIONS */
+closeCart.addEventListener("click", closeCartModal);
+cartOverlay.addEventListener("click", closeCartModal);
+
+    /* -------- QTY & REMOVE CONTROLS -------- */
     if (cartItemsList) {
         cartItemsList.addEventListener("click", (e) => {
             const index = e.target.dataset.index;
+            if (index === undefined) return;
 
             if (e.target.classList.contains("qty-btn")) {
                 const action = e.target.dataset.action;
-                if (action === "increase") cart[index].qty++;
-                if (action === "decrease" && cart[index].qty > 1) cart[index].qty--;
+
+                if (action === "increase") {
+                    cart[index].qty++;
+                } else if (action === "decrease" && cart[index].qty > 1) {
+                    cart[index].qty--;
+                }
             }
 
             if (e.target.classList.contains("remove-btn")) {
@@ -129,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    /* CLEAR CART */
+    /* -------- CLEAR CART -------- */
     if (clearCartBtn) {
         clearCartBtn.addEventListener("click", () => {
             if (confirm("Clear your entire cart?")) {
@@ -137,6 +157,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 saveCart();
                 updateCartDisplay();
             }
+        });
+    }
+
+    /* -------- CHECKOUT -------- */
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener("click", () => {
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+
+            saveCart();
+            window.location.href = "checkout.php";
         });
     }
 

@@ -10,8 +10,8 @@ $user = $_SESSION['user'] ?? null;
 <title>American Menu — Food Engine Eats</title>
 <link rel="stylesheet" href="draft.css">
 </head>
-
 <body>
+
 <header>
     <div class="logo">
         <a href="draft.php">
@@ -40,7 +40,6 @@ $user = $_SESSION['user'] ?? null;
     <h2 class="section-title">American Cuisines</h2>
 
     <div class="menu-grid">
-
         <div class="card food-card" data-name="Cheeseburger" data-price="10.00" data-image="website-images/cheeseburger.jpg">
             <img src="website-images/cheeseburger.jpg" alt="">
             <h3>Cheeseburger</h3>
@@ -72,9 +71,9 @@ $user = $_SESSION['user'] ?? null;
         </div>
     </div>
 </section>
-<?php include "cart-ui.html"; ?>
-<script src="draft.js"></script>
 
+<?php include "cart-ui.html"; ?>
+
+<script src="draft.js"></script>
 </body>
 </html>
-

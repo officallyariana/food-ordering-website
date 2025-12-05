@@ -49,5 +49,7 @@ $result = $stmt->get_result();
 </div>
 <?php endwhile; ?>
 
+<?php include "cart-ui.html"; ?>
+<script src="draft.js"></script>
 </body>
 </html>

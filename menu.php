@@ -10,7 +10,6 @@ $user = $_SESSION['user'] ?? null;
 <title>Food Engine Eats | Menu</title>
 <link rel="stylesheet" href="draft.css">
 </head>
-
 <body>
 
 <header>
@@ -23,11 +22,9 @@ $user = $_SESSION['user'] ?? null;
     <nav>
         <?php if ($user): ?>
             <span class="welcome-text">Welcome, <?= htmlspecialchars($user); ?>!</span>
-
             <form action="logout.php" method="POST" style="display:inline;">
                 <button class="logout-btn">Logout</button>
             </form>
-
         <?php else: ?>
             <a href="login.html">Login</a>
             <button class="signup-btn" onclick="window.location.href='signup.html'">Sign Up</button>
@@ -38,12 +35,10 @@ $user = $_SESSION['user'] ?? null;
     </nav>
 </header>
 
-
 <section class="menu-page">
     <h2 class="section-title">Explore Our Menu</h2>
 
     <div class="menu-grid">
-
         <div class="card">
             <img src="website-images/bibimbap.png" alt="">
             <h3>Asian Cuisines</h3>
@@ -69,6 +64,7 @@ $user = $_SESSION['user'] ?? null;
         </div>
     </div>
 </section>
+
 <section class="footer">
     <div class="credit">created by <span>arian s.</span> copyrights | all rights reserved!</div>
 </section>

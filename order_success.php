@@ -17,5 +17,7 @@ $order_id = $_GET['order_id'] ?? 0;
     <a href="draft.php" class="back-btn">Return to Home</a>
 </section>
 
+<?php include "cart-ui.html"; ?>
+<script src="draft.js"></script>
 </body>
 </html>

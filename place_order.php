@@ -7,7 +7,6 @@ if (!$user_id) {
 
 include "db.php";
 
-// Read JSON
 $data = json_decode(file_get_contents("php://input"), true);
 if (!$data) {
     die("Invalid JSON");
@@ -21,7 +20,6 @@ $notes    = $data["notes"];
 $payment  = $data["payment"];
 $cart     = $data["cart"];
 
-// Save or update address
 $stmt = $conn->prepare("
     INSERT INTO user_addresses (user_id, fullname, address, city, phone, notes)
     VALUES (?, ?, ?, ?, ?, ?)
@@ -36,13 +34,11 @@ $stmt->bind_param(
 );
 $stmt->execute();
 
-// Calculate total
 $total_amount = 0;
 foreach ($cart as $i) {
     $total_amount += $i["price"] * $i["qty"];
 }
 
-// Insert order
 $stmt = $conn->prepare("
     INSERT INTO orders (user_id, total_amount, payment_method)
     VALUES (?, ?, ?)
@@ -52,7 +48,7 @@ $stmt->execute();
 
 $order_id = $stmt->insert_id;
 
-// Insert items
+
 $stmt = $conn->prepare("
     INSERT INTO order_items (order_id, item_name, price, quantity, image)
     VALUES (?, ?, ?, ?, ?)

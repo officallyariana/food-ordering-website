@@ -111,7 +111,6 @@ $orders = $stmt->get_result();
 <div class="order-container">
     <a class="back-to-menu" href="menu.php">← Back to Menu</a>
     <h2>Your Order History</h2>
-
     <?php if ($orders->num_rows === 0): ?>
         <p>You have no orders yet.</p>
     <?php endif; ?>
@@ -132,30 +131,22 @@ $orders = $stmt->get_result();
         <p><strong>Total:</strong> $<?= number_format($order['total_amount'], 2) ?></p>
         <p><strong>Payment:</strong> <?= $order['payment_method'] ?></p>
         <p><strong>Date:</strong> <?= $order['created_at'] ?></p>
-
         <details>
             <summary><button class="view-btn">View Items</button></summary>
-
             <ul class="order-items">
             <?php
-                $stmt_items = $conn->prepare("SELECT item_name, qty, price FROM order_items WHERE order_id = ?");
-                $stmt_items->bind_param("i", $order['id']);
-                $stmt_items->execute();
-                $items = $stmt_items->get_result();
-
-                while ($item = $items->fetch_assoc()):
+            $stmt2 = $conn->prepare("SELECT item_name, price, quantity FROM order_items WHERE order_id = ?");
+            $stmt2->bind_param("i", $order['id']);
+            $stmt2->execute();
+            $items = $stmt2->get_result();
+            while ($i = $items->fetch_assoc()):
             ?>
-                <li><?= htmlspecialchars($item['item_name']) ?> × <?= $item['qty'] ?> — $<?= number_format($item['price'], 2) ?></li>
-
+                <li><?= $i['item_name'] ?> × <?= $i['quantity'] ?> — $<?= number_format($i['price'], 2) ?></li>
             <?php endwhile; ?>
             </ul>
         </details>
-
     </div>
-
     <?php endwhile; ?>
-
 </div>
-
 </body>
 </html>

@@ -1,14 +1,17 @@
 <?php
 session_start();
 $user_id = $_SESSION['user_id'] ?? null;
-if (!$user_id) die("Not logged in");
+if (!$user_id) {
+    die("Not logged in");
+}
 
 include "db.php";
 
 $data = json_decode(file_get_contents("php://input"), true);
-if (!$data) die("Invalid JSON received");
+if (!$data) {
+    die("Invalid JSON");
+}
 
-// Extract data
 $fullname = $data["fullname"];
 $address  = $data["address"];
 $city     = $data["city"];
@@ -17,7 +20,7 @@ $notes    = $data["notes"];
 $payment  = $data["payment"];
 $cart     = $data["cart"];
 
-// ---------- SAVE ADDRESS ----------
+// Save or update address
 $stmt = $conn->prepare("
     INSERT INTO user_addresses (user_id, fullname, address, city, phone, notes)
     VALUES (?, ?, ?, ?, ?, ?)
@@ -25,16 +28,19 @@ $stmt = $conn->prepare("
 ");
 
 $stmt->bind_param(
-    "issssssssss",
+    "issssisssss",
     $user_id, $fullname, $address, $city, $phone, $notes,
     $fullname, $address, $city, $phone, $notes
 );
 $stmt->execute();
 
+// Calculate total
+$total_amount = 0;
+foreach ($cart as $i) {
+    $total_amount += $i["price"] * $i["qty"];
+}
 
-// ---------- CREATE ORDER ----------
-$total_amount = array_sum(array_map(fn($i) => $i["price"] * $i["qty"], $cart));
-
+// Insert order
 $stmt = $conn->prepare("
     INSERT INTO orders (user_id, total_amount, payment_method)
     VALUES (?, ?, ?)
@@ -44,8 +50,7 @@ $stmt->execute();
 
 $order_id = $stmt->insert_id;
 
-
-// ---------- ADD ORDER ITEMS ----------
+// Insert items
 $stmt = $conn->prepare("
     INSERT INTO order_items (order_id, item_name, price, qty, image)
     VALUES (?, ?, ?, ?, ?)
@@ -63,6 +68,5 @@ foreach ($cart as $item) {
     $stmt->execute();
 }
 
-echo "Order placed successfully!";
+echo "OK";
 ?>
-

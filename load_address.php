@@ -1,31 +1,15 @@
 <?php
 session_start();
-header("Content-Type: application/json");
+$user_id = $_SESSION['user_id'] ?? null;
+if (!$user_id) die(json_encode(null));
 
-if (!isset($_SESSION["user"])) {
-    echo json_encode(["error" => "not logged in"]);
-    exit;
-}
+include "db.php";
 
-$conn = new mysqli("localhost", "root", "", "food_db");
-
-if ($conn->connect_error) {
-    echo json_encode(["error" => "db failed"]);
-    exit;
-}
-
-$user = $_SESSION["user"];
-
-$stmt = $conn->prepare("SELECT fullname, address, city, phone, notes FROM users WHERE username=?");
-$stmt->bind_param("s", $user);
+$stmt = $conn->prepare("SELECT fullname, address, city, phone, notes FROM user_addresses WHERE user_id = ?");
+$stmt->bind_param("i", $user_id);
 $stmt->execute();
-$stmt->bind_result($fullname, $address, $city, $phone, $notes);
-$stmt->fetch();
 
-echo json_encode([
-    "fullname" => $fullname,
-    "address" => $address,
-    "city" => $city,
-    "phone" => $phone,
-    "notes" => $notes
-]);
+$result = $stmt->get_result()->fetch_assoc();
+
+echo json_encode($result ?? []);
+?>

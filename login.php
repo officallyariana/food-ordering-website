@@ -51,8 +51,9 @@ if (! password_verify($password, $hashedPasswordFromDB)) {
     exit('Invalid email or password.');
 }
 
-$_SESSION['user_id'] = $id;
-$_SESSION['user'] = $full_name;
+$_SESSION['user_id'] = $user_row['id'];
+$_SESSION['full_name'] = $user_row['fullname'];
+
 
 header('Location: draft.php');
 exit();

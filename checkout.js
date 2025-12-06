@@ -6,8 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     let saved = {};
     try {
-        const r = await fetch("load_address.php");
-        saved = await r.json();
+        saved = await fetch("load_address.php").then(r => r.json());
     } catch (e) {
         console.log("Address fetch failed");
     }
@@ -57,31 +56,38 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     renderCart();
 
-    document.getElementById("checkout-form").addEventListener("submit", async e => {
-        e.preventDefault();
+document.getElementById("checkout-form").addEventListener("submit", async e => {
+    e.preventDefault();
 
-        if (!cart.length) return alert("Cart is empty!");
+    if (!cart.length) return alert("Cart is empty!");
 
-        const orderData = {
-            cart,
-            fullname: fullname.value,
-            address: address.value,
-            city: city.value,
-            phone: phone.value,
-            notes: notes.value,
-            payment: document.querySelector("input[name='payment']:checked").value
-        };
+    const orderData = {
+        cart,
+        fullname: fullname.value,
+        address: address.value,
+        city: city.value,
+        phone: phone.value,
+        notes: notes.value,
+        payment: document.querySelector("input[name='payment']:checked").value
+    };
 
-        const response = await fetch("place_order.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(orderData)
-        });
-
-        const result = await response.text();
-        alert(result);
-
-        localStorage.removeItem("cart");
-        window.location.href = "orders.php";
+    await fetch("place_order.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData)
     });
+
+    localStorage.removeItem("cart");
+
+
+    document.getElementById("order-success-modal").style.display = "flex";
+
+    document.getElementById("view-orders-btn").onclick = () => {
+        window.location.href = "orders.php";
+    };
+
+    setTimeout(() => {
+        window.location.href = "orders.php";
+    }, 3000);
 });
+}); 

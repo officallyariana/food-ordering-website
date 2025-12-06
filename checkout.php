@@ -130,15 +130,20 @@ if (!$user) {
                     <label><input type="radio" name="payment" value="Card Payment"> Credit / Debit Card</label>
                     <label><input type="radio" name="payment" value="PayPal"> PayPal (Coming soon)</label>
                 </div>
-
                 <button id="place-order" type="submit">Place Order</button>
-
             </form>
         </div>
-
     </div>
-
 </section>
+
+<div id="order-success-modal" class="order-success-modal">
+    <div class="order-success-box">
+        <h2>✔ Order Placed!</h2>
+        <p>Your order has been submitted successfully.</p>
+        <button id="view-orders-btn">View My Orders</button>
+    </div>
+</div>
+
 
 <script src="checkout.js"></script>
 </body>

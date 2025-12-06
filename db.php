@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
 $user = "root";
-$pass = "";
+$pass = "wvT==JfkTjT7";
 $dbname = "foodengine";
 
 $conn = new mysqli($host, $user, $pass, $dbname);

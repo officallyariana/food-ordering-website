@@ -29,6 +29,8 @@ $user = $_SESSION['user'] ?? null;
             <button class="signup-btn" onclick="window.location.href='signup.html'">Sign Up</button>
         <?php endif; ?>
         <button class="cart-btn"><span id="cart-count">0</span></button>
+        <a href="orders.php">My Orders</a>
+
     </nav>
 </header>
 

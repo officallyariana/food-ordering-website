@@ -1,55 +1,70 @@
 <?php
 session_start();
-require "db.php";
 
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.html");
-    exit();
+$user_id = $_SESSION['user_id'] ?? null;
+$full_name = $_SESSION['full_name'] ?? "User";
+
+if (!$user_id) {
+    die("Not logged in");
 }
 
-$user_id = $_SESSION['user_id'];
+include "db.php";
 
-$sql = "SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC";
-$stmt = $conn->prepare($sql);
+// FETCH ORDERS USING user_id (correct column)
+$stmt = $conn->prepare("SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
-$result = $stmt->get_result();
+$orders = $stmt->get_result();
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Orders</title>
-    <link rel="stylesheet" href="draft.css">
+<title>Your Orders</title>
+<link rel="stylesheet" href="draft.css">
 </head>
 <body>
 
-<h2>My Orders</h2>
+<header>
+    <div class="logo">
+        <a href="draft.php"><img src="website-images/logo.png"></a>
+    </div>
+    <nav>
+        <span class="welcome-text">Welcome, <?= htmlspecialchars($full_name); ?></span>
+        <button onclick="window.location.href='menu.php'" class="signup-btn">Menu</button>
+        <button onclick="window.location.href='orders.php'" class="signup-btn">Orders</button>
+        <form action="logout.php" method="POST" style="display:inline;">
+            <button class="logout-btn">Logout</button>
+        </form>
+    </nav>
+</header>
 
-<?php while ($order = $result->fetch_assoc()): ?>
+<h2>Your Order History</h2>
+
+<?php while ($order = $orders->fetch_assoc()): ?>
 <div class="order-box">
-    <p><strong>Order #<?= $order['id'] ?></strong></p>
-    <p>Total: $<?= number_format($order['total'], 2) ?></p>
+    <h3>Order #<?= $order['id'] ?></h3>
+    <p>Total: $<?= number_format($order['total_amount'], 2) ?></p>
+    <p>Status: <?= $order['status'] ?></p>
+    <p>Payment: <?= $order['payment_method'] ?></p>
     <p>Date: <?= $order['created_at'] ?></p>
 
     <details>
         <summary>View Items</summary>
         <ul>
         <?php
-        $items = $conn->prepare("SELECT * FROM order_items WHERE order_id = ?");
-        $items->bind_param("i", $order['id']);
-        $items->execute();
-        $items_result = $items->get_result();
+            $stmt2 = $conn->prepare("SELECT * FROM order_items WHERE order_id = ?");
+            $stmt2->bind_param("i", $order['id']);
+            $stmt2->execute();
+            $items = $stmt2->get_result();
 
-        while ($item = $items_result->fetch_assoc()):
+            while ($i = $items->fetch_assoc()):
         ?>
-            <li><?= $item['item_name'] ?> × <?= $item['quantity'] ?> - $<?= $item['price'] ?></li>
+            <li><?= $i['item_name'] ?> × <?= $i['qty'] ?> — $<?= number_format($i['price'], 2) ?></li>
         <?php endwhile; ?>
         </ul>
     </details>
 </div>
 <?php endwhile; ?>
 
-<?php include "cart-ui.html"; ?>
-<script src="draft.js"></script>
 </body>
 </html>

@@ -2,9 +2,6 @@
 session_start();
 require 'db.php';
 
-// --------------------
-// SHOW LOGIN FORM (GET)
-// --------------------
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 ?>
 <!DOCTYPE html>
@@ -47,9 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 exit();
 }
 
-// --------------------
-// PROCESS LOGIN (POST)
-// --------------------
 $email = trim($_POST['email'] ?? '');
 $password = $_POST['password'] ?? '';
 

@@ -1,7 +1,6 @@
 <?php
 session_start();
 $user = $_SESSION['full_name'] ?? null;
-
 if (!$user) {
     header("Location: login.php");
     exit;
@@ -55,7 +54,6 @@ if (!$user) {
     margin-top: 10px;
 }
 
-/* Form */
 .checkout-input {
     width: 100%;
     padding: 12px;
@@ -81,13 +79,10 @@ if (!$user) {
     gap: 10px;
     margin-bottom: 8px;
 }
-
 </style>
-
 </head>
 
 <body>
-
 <header>
     <div class="logo">
         <a href="draft.php"><img src="website-images/logo.png"></a>
@@ -101,7 +96,6 @@ if (!$user) {
 </header>
 
 <a href="menu.php" class="back-btn">← Back</a>
-
 <section class="menu-page">
     <h2 class="section-title">Checkout</h2>
 
@@ -112,20 +106,15 @@ if (!$user) {
             <div id="order-summary"></div>
             <p class="total-line" id="checkout-total"></p>
         </div>
-
         <div class="checkout-box">
             <h3>Delivery Info</h3>
-
             <form id="checkout-form">
-
                 <input type="text" class="checkout-input" id="fullname" placeholder="Full Name" required>
                 <input type="text" class="checkout-input" id="address" placeholder="Street Address" required>
                 <input type="text" class="checkout-input" id="city" placeholder="City" required>
                 <input type="text" class="checkout-input" id="phone" placeholder="Phone Number" required>
                 <textarea class="checkout-input" id="notes" placeholder="Delivery Notes (optional)" rows="3"></textarea>
-
                 <h3 style="margin-top: 10px;">Payment Method</h3>
-
                 <div class="payment-methods">
                     <label><input type="radio" name="payment" value="Cash on Delivery" checked> Cash on Delivery</label>
                     <label><input type="radio" name="payment" value="Card Payment"> Credit / Debit Card</label>

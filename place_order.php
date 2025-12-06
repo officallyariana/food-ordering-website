@@ -20,27 +20,29 @@ $notes    = $data["notes"];
 $payment  = $data["payment"];
 $cart     = $data["cart"];
 
-// Save or update address
+// ⭐ FIX 1 — user_addresses table uses `user` column (varchar), NOT `user_id`
 $stmt = $conn->prepare("
-    INSERT INTO user_addresses (user_id, fullname, address, city, phone, notes)
+    INSERT INTO user_addresses (user, fullname, address, city, phone, notes)
     VALUES (?, ?, ?, ?, ?, ?)
     ON DUPLICATE KEY UPDATE fullname=?, address=?, city=?, phone=?, notes=?
 ");
 
+$identifier = (string)$user_id; // convert to text for `user` column
+
 $stmt->bind_param(
-    "issssisssss",
-    $user_id, $fullname, $address, $city, $phone, $notes,
+    "sssssssssss",
+    $identifier, $fullname, $address, $city, $phone, $notes,
     $fullname, $address, $city, $phone, $notes
 );
 $stmt->execute();
 
-// Calculate total
+// ⭐ FIX 2 — calculate total
 $total_amount = 0;
 foreach ($cart as $i) {
     $total_amount += $i["price"] * $i["qty"];
 }
 
-// Insert order
+// ⭐ FIX 3 — INSERT into orders (this matches your DB)
 $stmt = $conn->prepare("
     INSERT INTO orders (user_id, total_amount, payment_method)
     VALUES (?, ?, ?)
@@ -50,20 +52,18 @@ $stmt->execute();
 
 $order_id = $stmt->insert_id;
 
-// Insert items
 $stmt = $conn->prepare("
-    INSERT INTO order_items (order_id, item_name, price, qty, image)
-    VALUES (?, ?, ?, ?, ?)
+    INSERT INTO order_items (order_id, item_name, price, quantity)
+    VALUES (?, ?, ?, ?)
 ");
 
 foreach ($cart as $item) {
     $stmt->bind_param(
-        "isdss",
+        "isdi",
         $order_id,
         $item["name"],
         $item["price"],
-        $item["qty"],
-        $item["image"]
+        $item["qty"] 
     );
     $stmt->execute();
 }

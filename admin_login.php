@@ -7,8 +7,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    $stmt = $conn->prepare("SELECT id, admin_email, admin_password 
-                            FROM admins WHERE admin_email = ? LIMIT 1");
+    $stmt = $conn->prepare("
+        SELECT id, admin_email, admin_password
+        FROM admins
+        WHERE admin_email = ?
+        LIMIT 1
+    ");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $stmt->store_result();
@@ -19,16 +23,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $stmt->bind_result($id, $admin_email, $hash);
     $stmt->fetch();
-
     if (!password_verify($password, $hash)) {
         exit("Wrong admin email or password.");
     }
 
-    $_SESSION['admin_id'] = $id;
+    // LOGIN SUCCESS
+    $_SESSION['user_id'] = $id;  
     $_SESSION['admin_email'] = $admin_email;
 
-    header("Location: admin_dashboard.php");
+    header("Location: admin.php");
     exit;
 }
 ?>
+
+
 

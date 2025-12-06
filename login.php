@@ -70,6 +70,6 @@ if (!password_verify($password, $hashedPassword)) {
 $_SESSION['user_id'] = $id;
 $_SESSION['full_name'] = $full_name;
 
-header("Location: draft.php");
+header("Location: foodengine.php");
 exit();
 ?>

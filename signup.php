@@ -66,6 +66,6 @@ if (! $insert->execute()) {
 $_SESSION['user_id'] = $insert->insert_id;
 $_SESSION['user']    = $full_name;
 
-header("Location: draft.php");
+header("Location: foodengine.php");
 exit();
 ?>

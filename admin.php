@@ -130,10 +130,7 @@ select {
         <button class="update-btn" type="submit">Update</button>
     </form>
 </div>
-
 <?php endwhile; ?>
-
 </div>
-
 </body>
 </html>

@@ -7,6 +7,7 @@ if (!$user_id) {
 
 include "db.php";
 
+// Read JSON
 $data = json_decode(file_get_contents("php://input"), true);
 if (!$data) {
     die("Invalid JSON");
@@ -20,29 +21,28 @@ $notes    = $data["notes"];
 $payment  = $data["payment"];
 $cart     = $data["cart"];
 
-// ⭐ FIX 1 — user_addresses table uses `user` column (varchar), NOT `user_id`
+// Save or update address
 $stmt = $conn->prepare("
-    INSERT INTO user_addresses (user, fullname, address, city, phone, notes)
+    INSERT INTO user_addresses (user_id, fullname, address, city, phone, notes)
     VALUES (?, ?, ?, ?, ?, ?)
     ON DUPLICATE KEY UPDATE fullname=?, address=?, city=?, phone=?, notes=?
 ");
 
-$identifier = (string)$user_id; // convert to text for `user` column
-
 $stmt->bind_param(
-    "sssssssssss",
-    $identifier, $fullname, $address, $city, $phone, $notes,
+    "issssssssss",
+    $user_id,
+    $fullname, $address, $city, $phone, $notes,
     $fullname, $address, $city, $phone, $notes
 );
 $stmt->execute();
 
-// ⭐ FIX 2 — calculate total
+// Calculate total
 $total_amount = 0;
 foreach ($cart as $i) {
     $total_amount += $i["price"] * $i["qty"];
 }
 
-// ⭐ FIX 3 — INSERT into orders (this matches your DB)
+// Insert order
 $stmt = $conn->prepare("
     INSERT INTO orders (user_id, total_amount, payment_method)
     VALUES (?, ?, ?)
@@ -52,18 +52,20 @@ $stmt->execute();
 
 $order_id = $stmt->insert_id;
 
+// Insert items
 $stmt = $conn->prepare("
-    INSERT INTO order_items (order_id, item_name, price, quantity)
-    VALUES (?, ?, ?, ?)
+    INSERT INTO order_items (order_id, item_name, price, quantity, image)
+    VALUES (?, ?, ?, ?, ?)
 ");
 
 foreach ($cart as $item) {
     $stmt->bind_param(
-        "isdi",
+        "isdss",
         $order_id,
         $item["name"],
         $item["price"],
-        $item["qty"] 
+        $item["qty"],
+        $item["image"]
     );
     $stmt->execute();
 }

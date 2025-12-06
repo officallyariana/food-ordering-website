@@ -1,19 +1,24 @@
 <?php
 session_start();
-$user_id = $_SESSION['user_id'] ?? null;
-$full_name = $_SESSION['full_name'] ?? "Customer";
-if (!$user_id) {
-    header("Location: login.html");
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
     exit;
 }
-include "db.php";
 
-$stmt = $conn->prepare("
+$user_id   = $_SESSION['user_id'];
+$full_name = $_SESSION['full_name'] ?? "Customer";
+
+require "db.php";
+
+$sql = "
     SELECT id, total_amount, status, payment_method, created_at
     FROM orders
     WHERE user_id = ?
     ORDER BY created_at DESC
-");
+";
+
+$stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $orders = $stmt->get_result();
@@ -70,12 +75,6 @@ $orders = $stmt->get_result();
 .status-completed { background: #4caf50; }
 .status-cancelled { background: #e53935; }
 
-.order-info p {
-    margin: 5px 0;
-    font-size: 0.95rem;
-    color: #444;
-}
-
 details {
     margin-top: 12px;
     padding: 12px;
@@ -104,25 +103,24 @@ details summary {
     padding: 7px 14px;
     border-radius: 6px;
     cursor: pointer;
-    margin-top: 8px;
     font-size: 0.9rem;
 }
 
 .reorder-btn {
+    display: inline-block;
     background: #000;
     color: #fff;
     padding: 10px 16px;
     border-radius: 8px;
     border: none;
-    margin-top: 12px;
+    margin-top: 14px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: 0.3s ease;
 }
 
 .reorder-btn:hover {
     background: #8e4eac;
 }
-
 </style>
 </head>
 
@@ -136,6 +134,7 @@ details summary {
         <span class="welcome-text">Welcome, <?= htmlspecialchars($full_name); ?></span>
         <button onclick="window.location.href='menu.php'" class="signup-btn">Menu</button>
         <button onclick="window.location.href='orders.php'" class="signup-btn">Orders</button>
+
         <form action="logout.php" method="POST" style="display:inline;">
             <button class="logout-btn">Logout</button>
         </form>
@@ -143,8 +142,12 @@ details summary {
 </header>
 
 <div class="order-container">
-    <a class="back-to-menu" href="menu.php">← Back to Menu</a>
     <h2>Your Order History</h2>
+
+<?php if ($orders->num_rows === 0): ?>
+    <p>You have not placed any orders yet.</p>
+<?php endif; ?>
+
 <?php while ($order = $orders->fetch_assoc()): ?>
 
 <div class="order-card">
@@ -152,16 +155,16 @@ details summary {
     <div class="order-header">
         <span class="order-id">Order #<?= $order['id'] ?></span>
 
-        <span class="status-badge
+        <span class="status-badge 
             <?= $order['status'] == 'pending' ? 'status-pending' :
                 ($order['status'] == 'completed' ? 'status-completed' : 'status-cancelled'); ?>">
-            <?= htmlentities($order['status']) ?>
+            <?= htmlspecialchars($order['status']) ?>
         </span>
     </div>
 
     <div class="order-info">
         <p><strong>Total:</strong> $<?= number_format($order['total_amount'], 2) ?></p>
-        <p><strong>Payment:</strong> <?= htmlentities($order['payment_method']) ?></p>
+        <p><strong>Payment:</strong> <?= htmlspecialchars($order['payment_method']) ?></p>
         <p><strong>Date:</strong> <?= $order['created_at'] ?></p>
     </div>
 
@@ -170,47 +173,39 @@ details summary {
 
         <ul class="order-items">
         <?php
-            $stmt2 = $conn->prepare("SELECT item_name, price, quantity FROM order_items WHERE order_id = ?");
-            $stmt2->bind_param("i", $order['id']);
-            $stmt2->execute();
-            $items = $stmt2->get_result();
+            $items_sql = "SELECT item_name, price, quantity FROM order_items WHERE order_id = ?";
+            $stmt_items = $conn->prepare($items_sql);
+            $stmt_items->bind_param("i", $order['id']);
+            $stmt_items->execute();
+            $items = $stmt_items->get_result();
 
             while ($i = $items->fetch_assoc()):
         ?>
-            <li><?= $i['item_name'] ?> × <?= $i['quantity'] ?> — $<?= number_format($i['price'], 2) ?></li>
+            <li><?= htmlspecialchars($i['item_name']) ?> × <?= $i['quantity'] ?> — $<?= number_format($i['price'], 2) ?></li>
         <?php endwhile; ?>
         </ul>
     </details>
+
     <button class="reorder-btn" data-order-id="<?= $order['id'] ?>">Order Again</button>
 </div>
+
 <?php endwhile; ?>
 </div>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const buttons = document.querySelectorAll(".reorder-btn");
 
-    buttons.forEach(btn => {
-        btn.addEventListener("click", async () => {
-            const orderId = btn.dataset.orderId;
-            if (!orderId) {
-                alert("Missing order id for reorder.");
-                return;
-            }
-            try {
-                const res = await fetch("reorder.php?id=" + encodeURIComponent(orderId));
-                const data = await res.json();
-                if (!data.success) {
-                    alert("Reorder failed: " + (data.error || "Unknown error"));
-                    console.error("Reorder error:", data);
-                    return;
-                }
-                localStorage.setItem("cart", JSON.stringify(data.cart));
-                window.location.href = "checkout.php";
-            } catch (err) {
-                console.error(err);
-                alert("Reorder failed due to a network or server error.");
-            }
-        });
+<script>
+document.querySelectorAll(".reorder-btn").forEach(btn => {
+    btn.addEventListener("click", async () => {
+        const orderId = btn.dataset.orderId;
+
+        const res = await fetch("reorder.php?id=" + encodeURIComponent(orderId));
+        const data = await res.json();
+
+        if (data.success) {
+            localStorage.setItem("cart", JSON.stringify(data.cart));
+            window.location.href = "checkout.php";
+        } else {
+            alert("Reorder failed: " + data.error);
+        }
     });
 });
 </script>

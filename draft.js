@@ -47,9 +47,8 @@ function updateCartDisplay() {
                 <button class="qty-btn" data-index="${index}" data-action="decrease">-</button>
                 <span>${item.qty}</span>
                 <button class="qty-btn" data-index="${index}" data-action="increase">+</button>
-                <button class="remove-btn" data-index="${index}">🗑</button>
-            </div>
-        `;
+                <button class="remove-btn" data-index="${index}"></button>
+            </div>`;
         cartItemsList.appendChild(li);
     });
 
@@ -69,8 +68,6 @@ function addToCart(name, price, image) {
 
     updateCartDisplay();
 }
-
-
 
 document.addEventListener("DOMContentLoaded", () => {
     const addButtons = document.querySelectorAll(".add-to-cart");

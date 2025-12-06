@@ -1,5 +1,6 @@
 <?php
 session_start();
+$user_id = $_SESSION['user_id'] ?? null;
 $user = $_SESSION['full_name'] ?? null;
 ?>
 <!DOCTYPE html>
@@ -16,7 +17,7 @@ $user = $_SESSION['full_name'] ?? null;
 <header>
     <div class="logo">
         <a href="draft.php">
-            <img src="website-images/logo.png" alt="Food Engine Eats Logo">
+            <img src="website-images/logo.png" alt="Food Engine Eats Logo" />
         </a>
     </div>
 
@@ -29,16 +30,19 @@ $user = $_SESSION['full_name'] ?? null;
             </form>
 
         <?php else: ?>
-            <a href="login.html">Login</a>
+            <a href="login.php">Login</a>
             <button class="signup-btn" onclick="window.location.href='signup.html'">Sign Up</button>
         <?php endif; ?>
 
         <button class="cart-btn"><span id="cart-count">0</span></button>
-        <a href="orders.php">My Orders</a>
+
+        <?php if ($user): ?>
+            <a href="orders.php">My Orders</a>
+        <?php endif; ?>
     </nav>
 </header>
 
-
+<!-- HERO SECTION -->
 <section class="hero">
     <div class="rating">
         <span>Google:</span>
@@ -49,7 +53,9 @@ $user = $_SESSION['full_name'] ?? null;
     <h1>Order Now</h1>
     <p>where the restaurants and customers meet!</p>
 
-    <button class="explore" onclick="window.location.href='menu.php'">Explore menu</button>
+    <button class="explore" onclick="window.location.href='menu.php'">
+        Explore menu
+    </button>
 
     <div class="image-slider">
         <img src="website-images/menu-1.png" alt="food 1" />
@@ -58,7 +64,7 @@ $user = $_SESSION['full_name'] ?? null;
     </div>
 </section>
 
-
+<!-- MENU CARDS -->
 <section id="menu-cards" class="menu-cards">
     <h2 class="section-title">OUR MENU</h2>
 
@@ -89,7 +95,7 @@ $user = $_SESSION['full_name'] ?? null;
     </div>
 </section>
 
-
+<!-- TOP PICKS -->
 <section class="top-picks">
     <h2 class="section-title">Top Picks</h2>
 
@@ -111,7 +117,7 @@ $user = $_SESSION['full_name'] ?? null;
     </div>
 </section>
 
-
+<!-- WHY CHOOSE US -->
 <section class="why-choose-us">
     <h2 class="section-title">WHY CHOOSE US?</h2>
 
@@ -122,38 +128,35 @@ $user = $_SESSION['full_name'] ?? null;
 
         <div class="why-text">
             <div class="why-item"><h4>Fast Delivery</h4><p>Prompt and reliable delivery to your doorstep.</p></div>
-            <div class="why-item"><h4>Owners manage menus</h4><p>Full control over menu items and availability.</p></div>
-            <div class="why-item"><h4>Better customer service</h4><p>Fast and responsive support.</p></div>
-            <div class="why-item"><h4>Cost effective</h4><p>Flexible pricing plans.</p></div>
-            <div class="why-item"><h4>Variety of cuisines</h4><p>Diverse food options.</p></div>
-            <div class="why-item"><h4>Easy interface</h4><p>User-friendly platform.</p></div>
-            <div class="why-item"><h4>Secure payments</h4><p>Safe payment methods.</p></div>
+            <div class="why-item"><h4>Owners manage their menus</h4><p>Owners have full control over their menu items and availability.</p></div>
+            <div class="why-item"><h4>Better customer service</h4><p>We prioritize your satisfaction with fast and responsive support.</p></div>
+            <div class="why-item"><h4>Cost effective</h4><p>Flexible pricing plans to suit your needs.</p></div>
+            <div class="why-item"><h4>Variety</h4><p>Diverse food options from many cuisines.</p></div>
+            <div class="why-item"><h4>User-friendly</h4><p>Simple and intuitive ordering experience.</p></div>
+            <div class="why-item"><h4>Secure payments</h4><p>Multiple safe payment options.</p></div>
         </div>
     </div>
 </section>
 
-
+<!-- ABOUT US -->
 <section class="about-us">
     <div class="about-container">
         <div class="about-text">
             <h2>ABOUT US!</h2>
             <p>
-                I made this website to connect restaurants and customers seamlessly.
-                Whether you're a business owner or customer, this platform is built for you.
+                We connect restaurants and customers through a fast, modern, 
+                and easy-to-use food ordering platform.
             </p>
         </div>
-
         <div class="about-image">
             <img src="website-images/about-image.jpg" alt="">
         </div>
     </div>
 </section>
 
-
+<!-- FOOTER -->
 <section class="footer">
-    <div class="credit">
-        created by <span>ariana s.</span> copyrights | all rights reserved!
-    </div>
+    <div class="credit">created by <span>ariana s.</span> copyrights | all rights reserved!</div>
 </section>
 
 <?php include "cart-ui.html"; ?>

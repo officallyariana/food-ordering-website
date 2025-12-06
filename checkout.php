@@ -1,8 +1,9 @@
 <?php
 session_start();
-$user = $_SESSION['user'] ?? null;
+$user = $_SESSION['full_name'] ?? null;
+
 if (!$user) {
-    header("Location: login.html");
+    header("Location: login.php");
     exit;
 }
 ?>

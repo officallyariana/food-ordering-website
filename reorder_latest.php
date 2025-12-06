@@ -9,7 +9,6 @@ include "db.php";
 
 $user_id = $_SESSION['user_id'];
 
-// Get latest order
 $stmt = $conn->prepare("
     SELECT id FROM orders 
     WHERE user_id = ? 
@@ -29,7 +28,6 @@ if (!$order) {
 
 $order_id = $order['id'];
 
-// Get all items in the last order
 $stmt2 = $conn->prepare("
     SELECT item_name, price, qty, image 
     FROM order_items 

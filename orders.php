@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 $user_id = $_SESSION['user_id'] ?? null;
 $full_name = $_SESSION['full_name'] ?? "Customer";
 
@@ -9,6 +10,7 @@ if (!$user_id) {
 }
 
 include "db.php";
+
 $stmt = $conn->prepare("
     SELECT id, total_amount, status, payment_method, created_at
     FROM orders
@@ -18,7 +20,6 @@ $stmt = $conn->prepare("
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $orders = $stmt->get_result();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +60,6 @@ $orders = $stmt->get_result();
     color: white;
     font-size: 0.9rem;
 }
-
 .status-pending { background: #ff9800; }
 .status-completed { background: #4caf50; }
 .status-cancelled { background: #e53935; }
@@ -70,7 +70,6 @@ $orders = $stmt->get_result();
     padding: 12px;
     border-radius: 8px;
 }
-
 .order-items li {
     margin-bottom: 6px;
 }
@@ -103,7 +102,6 @@ $orders = $stmt->get_result();
         <span class="welcome-text">Welcome, <?= htmlspecialchars($full_name); ?></span>
         <button onclick="window.location.href='menu.php'" class="signup-btn">Menu</button>
         <button onclick="window.location.href='orders.php'" class="signup-btn">Orders</button>
-
         <form action="logout.php" method="POST" style="display:inline;">
             <button class="logout-btn">Logout</button>
         </form>
@@ -125,10 +123,8 @@ $orders = $stmt->get_result();
             <span class="order-id">Order #<?= $order['id'] ?></span>
 
             <span class="status-badge 
-                <?php 
-                    echo $order['status'] == 'pending' ? 'status-pending' : 
-                        ($order['status'] == 'completed' ? 'status-completed' : 'status-cancelled'); 
-                ?>">
+                <?= $order['status'] == 'pending' ? 'status-pending' : 
+                    ($order['status'] == 'completed' ? 'status-completed' : 'status-cancelled'); ?>">
                 <?= ucfirst($order['status']) ?>
             </span>
         </div>
@@ -142,14 +138,14 @@ $orders = $stmt->get_result();
 
             <ul class="order-items">
             <?php
-                $stmt2 = $conn->prepare("SELECT * FROM order_items WHERE order_id = ?");
-                $stmt2->bind_param("i", $order['id']);
-                $stmt2->execute();
-                $items = $stmt2->get_result();
+                $stmt_items = $conn->prepare("SELECT item_name, qty, price FROM order_items WHERE order_id = ?");
+                $stmt_items->bind_param("i", $order['id']);
+                $stmt_items->execute();
+                $items = $stmt_items->get_result();
 
                 while ($item = $items->fetch_assoc()):
             ?>
-                <li><?= $item['item_name'] ?> × <?= $item['qty'] ?> — $<?= number_format($item['price'], 2) ?></li>
+                <li><?= htmlspecialchars($item['item_name']) ?> × <?= $item['qty'] ?> — $<?= number_format($item['price'], 2) ?></li>
 
             <?php endwhile; ?>
             </ul>

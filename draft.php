@@ -64,8 +64,57 @@ $user = $_SESSION['full_name'] ?? null;
     </div>
 </section>
 
+
+<section class="pricing-section">
+    <h2 class="section-title">Pricing Plans</h2>
+
+    <div class="pricing-grid">
+
+        <div class="pricing-card">
+            <h3>Starter</h3>
+            <p class="price">Free</p>
+            <ul>
+                <li>Up to 10 menu items</li>
+                <li>Unlimited orders</li>
+                <li>Basic analytics</li>
+                <li>Email support</li>
+            </ul>
+            <button class="price-btn">Choose Plan</button>
+        </div>
+
+        <div class="pricing-card popular">
+            <span class="popular-badge">Most Popular</span>
+            <h3>Professional</h3>
+            <p class="price">$29 / month</p>
+            <ul>
+                <li>Unlimited menu items</li>
+                <li>Priority search ranking</li>
+                <li>Custom branding</li>
+                <li>Advanced analytics</li>
+                <li>SMS notifications</li>
+            </ul>
+            <button class="price-btn">Choose Plan</button>
+        </div>
+
+        <div class="pricing-card">
+            <h3>Enterprise</h3>
+            <p class="price">$99 / month</p>
+            <ul>
+                <li>Multi-location support</li>
+                <li>Dedicated manager</li>
+                <li>POS Integration</li>
+                <li>API Access</li>
+                <li>24/7 phone support</li>
+            </ul>
+            <button class="price-btn">Contact Sales</button>
+        </div>
+
+    </div>
+</section>
+
+
 <section id="menu-cards" class="menu-cards">
-    <h2 class="section-title">OUR MENU</h2>
+    <h2 class="section-title">OUR MENU!</h2>
 
     <div class="home-menu-grid">
         <div class="card">

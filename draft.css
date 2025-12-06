@@ -98,6 +98,7 @@ nav a {
     margin-bottom: 1rem;
 }
 
+
 .explore {
     background: #000;
     color: #fff;
@@ -414,4 +415,76 @@ footer {
 .admin-btn-modern:active {
     transform: scale(0.97);
     box-shadow: 0 3px 8px rgba(108, 40, 140, 0.3);
+}
+
+/* --- PRICING SECTION FIX --- */
+
+.pricing-section {
+    padding: 60px 20px !important;
+    text-align: center !important;
+}
+
+.pricing-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 25px !important;
+    margin-top: 30px !important;
+}
+
+.pricing-card {
+    background: #fff !important;
+    width: 280px !important;
+    padding: 25px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1) !important;
+    transition: 0.25s ease !important;
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px) !important;
+}
+
+.price {
+    font-size: 2rem !important;
+    font-weight: bold !important;
+    margin-bottom: 10px !important;
+}
+
+.pricing-card ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 15px 0 !important;
+    text-align: left !important;
+}
+
+.price-btn {
+    background: #8e4eac !important;
+    color: white !important;
+    padding: 10px !important;
+    width: 100% !important;
+    border-radius: 8px !important;
+    border: none !important;
+    cursor: pointer !important;
+}
+
+.price-btn:hover {
+    background: #000 !important;
+}
+
+.popular {
+    border: 2px solid #8e4eac !important;
+    position: relative !important;
+}
+
+.popular-badge {
+    position: absolute !important;
+    top: -10px !important;
+    right: 20px !important;
+    background: #8e4eac !important;
+    color: #fff !important;
+    padding: 5px 10px !important;
+    border-radius: 6px !important;
+    font-size: 0.8rem !important;
+    font-weight: bold !important;
 }

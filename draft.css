@@ -387,3 +387,31 @@ footer {
     from { transform: scale(0.7); opacity: 0; }
     to   { transform: scale(1); opacity: 1; }
 }
+
+
+.admin-btn-modern {
+    display: inline-block;
+    padding: 12px 28px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 10px;
+
+    background: linear-gradient(135deg, #8e4eac, #6a2ca8);
+    box-shadow: 0 4px 12px rgba(142, 78, 172, 0.3);
+
+    transition: all 0.3s ease;
+}
+
+.admin-btn-modern:hover {
+    background: linear-gradient(135deg, #6a2ca8, #8e4eac);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(108, 40, 140, 0.45),
+                0 0 12px rgba(142, 78, 172, 0.4);
+}
+
+.admin-btn-modern:active {
+    transform: scale(0.97);
+    box-shadow: 0 3px 8px rgba(108, 40, 140, 0.3);
+}

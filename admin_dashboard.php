@@ -116,7 +116,6 @@ body {
 
 <div class="admin-layout">
 
-    <!-- Sidebar -->
     <aside class="admin-sidebar">
         <div class="logo">
             <a href="admin_dashboard.php"><img src="website-images/logo.png" alt="Admin"></a>

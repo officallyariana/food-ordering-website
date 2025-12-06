@@ -64,7 +64,6 @@ $user = $_SESSION['full_name'] ?? null;
     </div>
 </section>
 
-<!-- MENU CARDS -->
 <section id="menu-cards" class="menu-cards">
     <h2 class="section-title">OUR MENU</h2>
 
@@ -95,7 +94,6 @@ $user = $_SESSION['full_name'] ?? null;
     </div>
 </section>
 
-<!-- TOP PICKS -->
 <section class="top-picks">
     <h2 class="section-title">Top Picks</h2>
 
@@ -138,14 +136,13 @@ $user = $_SESSION['full_name'] ?? null;
     </div>
 </section>
 
-<!-- ABOUT US -->
 <section class="about-us">
     <div class="about-container">
         <div class="about-text">
             <h2>ABOUT US!</h2>
             <p>
                 We connect restaurants and customers through a fast, modern, 
-                and easy-to-use food ordering platform.
+                and easy-to-use food ordering platform. 
             </p>
         </div>
         <div class="about-image">
@@ -154,9 +151,8 @@ $user = $_SESSION['full_name'] ?? null;
     </div>
 </section>
 
-<!-- FOOTER -->
 <section class="footer">
-    <a href="admin_login.html" class="admin-btn">Admin Login</a>
+    <a href="admin_login.html" class="admin-btn-modern">Admin Login</a>
     <div class="credit">created by <span>ariana s.</span> copyrights | all rights reserved!</div>
 </section>
 

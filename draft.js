@@ -103,18 +103,16 @@ cartBtn.addEventListener("click", () => {
     updateCartDisplay();
 });
 
-    /* -------- CLOSE CART -------- */
 function closeCartModal() {
     cartModal.classList.remove("show");
     setTimeout(() => {
         cartModal.style.display = "none";
-    }, 300); // matches CSS animation
+    }, 300); 
 }
 
 closeCart.addEventListener("click", closeCartModal);
 cartOverlay.addEventListener("click", closeCartModal);
 
-    /* -------- QTY & REMOVE CONTROLS -------- */
     if (cartItemsList) {
         cartItemsList.addEventListener("click", (e) => {
             const index = e.target.dataset.index;
@@ -138,7 +136,6 @@ cartOverlay.addEventListener("click", closeCartModal);
         });
     }
 
-    /* -------- CLEAR CART -------- */
     if (clearCartBtn) {
         clearCartBtn.addEventListener("click", () => {
             if (confirm("Clear your entire cart?")) {
@@ -149,7 +146,6 @@ cartOverlay.addEventListener("click", closeCartModal);
         });
     }
 
-    /* -------- CHECKOUT -------- */
     if (checkoutBtn) {
         checkoutBtn.addEventListener("click", () => {
             if (cart.length === 0) {

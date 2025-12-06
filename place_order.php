@@ -1,90 +1,56 @@
 <?php
 session_start();
 $user = $_SESSION['user'] ?? null;
+if (!$user) die("Not logged in");
 
-if (!$user) {
-    die("User not logged in.");
-}
+include "db.php";
 
-// DATABASE CONNECTION
-$conn = new mysqli("localhost", "root", "", "food_engine_eats");
-
-if ($conn->connect_error) {
-    die("DB Connection failed: " . $conn->connect_error);
-}
-
-// READ CART JSON
-$cart = json_decode($_POST['orderData'], true);
-
-if (!$cart || count($cart) === 0) {
-    die("Cart is empty.");
-}
-session_start();
-header("Content-Type: application/json");
-
-// Ensure user is logged in
-if (!isset($_SESSION['user'])) {
-    echo json_encode(["status" => "error", "message" => "User not logged in"]);
-    exit;
-}
-
-$user = $_SESSION['user'];
-
-// Read JSON input
 $data = json_decode(file_get_contents("php://input"), true);
+if (!$data) die("Invalid data received");
 
-$cart = $data["cart"] ?? [];
-$total = $data["total"] ?? 0;
+$fullname = $data["fullname"];
+$address  = $data["address"];
+$city     = $data["city"];
+$phone    = $data["phone"];
+$notes    = $data["notes"];
+$payment  = $data["payment"];
+$cart     = $data["cart"];
 
-// Validate
-if (empty($cart)) {
-    echo json_encode(["status" => "error", "message" => "Cart is empty"]);
-    exit;
-}
+$stmt = $conn->prepare("
+    INSERT INTO user_addresses (username, fullname, address, city, phone, notes)
+    VALUES (?, ?, ?, ?, ?, ?)
+    ON DUPLICATE KEY UPDATE fullname=?, address=?, city=?, phone=?, notes=?
+");
 
-// DB connection
-$conn = new mysqli("localhost", "root", "", "food_engine_eats");
+$stmt->bind_param(
+    "ssssssssss",
+    $user, $fullname, $address, $city, $phone, $notes,
+    $fullname, $address, $city, $phone, $notes
+);
 
-if ($conn->connect_error) {
-    echo json_encode(["status" => "error", "message" => "Database connection failed"]);
-    exit;
-}
+$stmt->execute();
 
-// Insert order
-$stmt = $conn->prepare("INSERT INTO orders (user, total_price) VALUES (?, ?)");
-$stmt->bind_param("sd", $user, $total);
+$total_price = array_sum(array_map(fn($i) => $i["price"] * $i["qty"], $cart));
+
+$stmt = $conn->prepare("INSERT INTO orders (username, total_price, payment_method) VALUES (?, ?, ?)");
+$stmt->bind_param("sds", $user, $total_price, $payment);
 $stmt->execute();
 
 $order_id = $stmt->insert_id;
-$stmt->close();
 
-// Insert each item
-$item_stmt = $conn->prepare("
-    INSERT INTO order_items (order_id, item_name, price, qty, image)
-    VALUES (?, ?, ?, ?, ?)
-");
+$stmt = $conn->prepare("INSERT INTO order_items (order_id, item_name, price, qty, image) VALUES (?, ?, ?, ?, ?)");
 
 foreach ($cart as $item) {
-    $item_stmt->bind_param(
-        "issds",
+    $stmt->bind_param(
+        "isdss",
         $order_id,
         $item["name"],
         $item["price"],
         $item["qty"],
         $item["image"]
     );
-    $item_stmt->execute();
+    $stmt->execute();
 }
 
-$item_stmt->close();
-$conn->close();
-
-// SUCCESS RESPONSE
-echo json_encode([
-    "status" => "success",
-    "message" => "Order placed successfully",
-    "order_id" => $order_id
-]);
-
-exit;
+echo "Order placed successfully!";
 ?>

@@ -17,6 +17,7 @@ if ($email === '' || $password === '') {
 
 $sql = "SELECT id, full_name, password FROM users WHERE email = ? LIMIT 1";
 $stmt = $conn->prepare($sql);
+
 if ($stmt === false) {
     error_log("DB prepare error (login): " . $conn->error);
     http_response_code(500);
@@ -24,7 +25,8 @@ if ($stmt === false) {
 }
 
 $stmt->bind_param('s', $email);
-if (! $stmt->execute()) {
+
+if (!$stmt->execute()) {
     error_log("DB execute error (login): " . $stmt->error);
     http_response_code(500);
     exit('Server error.');
@@ -46,14 +48,13 @@ if (empty($hashedPasswordFromDB)) {
     exit('Server error.');
 }
 
-if (! password_verify($password, $hashedPasswordFromDB)) {
+if (!password_verify($password, $hashedPasswordFromDB)) {
     http_response_code(401);
     exit('Invalid email or password.');
 }
 
-$_SESSION['user_id'] = $user_row['id'];
-$_SESSION['full_name'] = $user_row['fullname'];
-
+$_SESSION['user_id']   = $id;
+$_SESSION['full_name'] = $full_name;
 
 header('Location: draft.php');
 exit();

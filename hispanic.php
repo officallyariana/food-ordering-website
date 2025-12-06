@@ -7,26 +7,31 @@ $user = $_SESSION['full_name'] ?? null;
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hispanic Menu — Food Engine Eats</title>
+<title>Food Engine Eats</title>
 <link rel="stylesheet" href="draft.css">
 </head>
 <body>
-
 <header>
     <div class="logo">
-        <a href="draft.php"><img src="website-images/logo.png" alt=""></a>
+        <a href="draft.php">
+            <img src="website-images/logo.png" alt="">
+        </a>
     </div>
+
     <nav>
         <?php if ($user): ?>
             <span class="welcome-text">Welcome, <?= htmlspecialchars($user); ?>!</span>
+
             <form action="logout.php" method="POST" style="display:inline;">
                 <button class="logout-btn">Logout</button>
             </form>
         <?php else: ?>
-            <a href="login.html">Login</a>
+            <a href="login.php">Login</a>
             <button class="signup-btn" onclick="window.location.href='signup.html'">Sign Up</button>
         <?php endif; ?>
+
         <button class="cart-btn"><span id="cart-count">0</span></button>
+        <a href="orders.php">My Orders</a>
     </nav>
 </header>
 

@@ -14,7 +14,7 @@ $order_id = $_GET['order_id'] ?? 0;
     <h1> Order Successful!</h1>
     <p>Your order ID is: <strong>#<?= htmlspecialchars($order_id) ?></strong></p>
 
-    <a href="draft.php" class="back-btn">Return to Home</a>
+    <a href="foodengine.php" class="back-btn">Return to Home</a>
 </section>
 
 <?php include "cart-ui.html"; ?>

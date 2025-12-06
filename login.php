@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 <header>
     <div class="logo">
-        <a href="draft.php">
+        <a href="foodengine.php">
             <img src="website-images/logo.png" alt="Food Engine Eats Logo">
         </a>
     </div>

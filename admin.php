@@ -74,7 +74,7 @@ select {
 
 <header>
     <div class="logo">
-        <a href="draft.php"><img src="website-images/logo.png"></a>
+        <a href="foodengine.php"><img src="website-images/logo.png"></a>
     </div>
     <nav>
         <button onclick="window.location.href='admin.php'" class="signup-btn">Admin Home</button>

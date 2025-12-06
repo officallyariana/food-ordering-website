@@ -128,7 +128,7 @@ details summary {
 
 <header>
     <div class="logo">
-        <a href="draft.php"><img src="website-images/logo.png"></a>
+        <a href="foodengine.php"><img src="website-images/logo.png"></a>
     </div>
     <nav>
         <span class="welcome-text">Welcome, <?= htmlspecialchars($full_name); ?></span>

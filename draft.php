@@ -156,6 +156,7 @@ $user = $_SESSION['full_name'] ?? null;
 
 <!-- FOOTER -->
 <section class="footer">
+    <a href="admin_login.html" class="admin-btn">Admin Login</a>
     <div class="credit">created by <span>ariana s.</span> copyrights | all rights reserved!</div>
 </section>
 

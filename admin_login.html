@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login • Food Engine Eats</title>
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+<img src="website-images/login.png" class="auth-bg">
+<div class="auth-bg-overlay"></div>
+
+<header>
+    <div class="logo">
+        <a href="draft.php">
+            <img src="website-images/logo.png" alt="Food Engine Eats Logo">
+        </a>
+    </div>
+</header>
+
+<div class="auth-container">
+    <form action="admin_login.php" method="POST" class="auth-box">
+        <h2>Admin Login</h2>
+
+        <input type="email" name="email" placeholder="Admin Email" required>
+        <input type="password" name="password" placeholder="Admin Password" required>
+
+        <button type="submit">Login</button>
+
+        <p><a href="draft.php">← Back to site</a></p>
+    </form>
+</div>
+
+</body>
+</html>
+

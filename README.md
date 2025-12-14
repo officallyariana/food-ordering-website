@@ -10,6 +10,7 @@ programs to have installed: xampp, php,mysql
 the folder should be placed inside-C:\xampp\htdocs\ 
 browser-chrome or safari
 
+website: http://34.193.83.128/foodengine.php
 author:
 food engine 
 ariana sewell
